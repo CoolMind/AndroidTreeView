@@ -212,7 +212,7 @@ class TreeNode(val value: Any?) {
             get() = createNodeView(mNode!!, mNode!!.value as E)
 
         open val nodeItemsView: ViewGroup
-            get() = view.findViewById(R.id.node_items) as ViewGroup
+            get() = view.findViewById<ViewGroup>(R.id.node_items) as ViewGroup
 
         val isInitialized: Boolean
             get() = mView != null

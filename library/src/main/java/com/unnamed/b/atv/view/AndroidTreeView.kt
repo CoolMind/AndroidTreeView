@@ -20,7 +20,7 @@ import java.util.*
  */
 class AndroidTreeView {
 
-    protected var mRoot: TreeNode? = null
+    private var mRoot: TreeNode? = null
     private var mContext: Context? = null
     private var applyForRoot: Boolean = false
     private var containerStyle = 0

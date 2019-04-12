@@ -6,6 +6,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 
 import com.unnamed.b.atv.model.TreeNode
 import com.unnamed.b.atv.sample.R
@@ -22,20 +23,20 @@ class TwoDScrollingFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_selectable_nodes, container, false)
-        rootView.findViewById(R.id.status).visibility = View.GONE
+        rootView.findViewById<LinearLayout>(R.id.status).visibility = View.GONE
         val containerView = rootView.findViewById(R.id.container) as ViewGroup
 
         val root = TreeNode.root()
 
-        val s1 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_folder, "Folder with very long name ")).setViewHolder(SelectableHeaderHolder(activity))
-        val s2 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_folder, "Another folder with very long name")).setViewHolder(SelectableHeaderHolder(activity))
+        val s1 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_folder, "Folder with very long name ")).setViewHolder(SelectableHeaderHolder(context!!))
+        val s2 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_folder, "Another folder with very long name")).setViewHolder(SelectableHeaderHolder(context!!))
 
         fillFolder(s1)
         fillFolder(s2)
 
         root.addChildren(s1, s2)
 
-        tView = AndroidTreeView(activity, root)
+        tView = AndroidTreeView(context!!, root)
         tView!!.setDefaultAnimation(true)
         tView!!.setUse2dScroll(true)
         tView!!.setDefaultContainerStyle(R.style.TreeNodeStyleCustom)
@@ -55,7 +56,7 @@ class TwoDScrollingFragment : Fragment() {
     private fun fillFolder(folder: TreeNode) {
         var currentNode = folder
         for (i in 0..9) {
-            val file = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_folder, NAME)).setViewHolder(SelectableHeaderHolder(activity))
+            val file = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_folder, NAME)).setViewHolder(SelectableHeaderHolder(context!!))
             currentNode.addChild(file)
             currentNode = file
         }

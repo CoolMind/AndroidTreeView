@@ -27,16 +27,16 @@ class IconTreeItemHolder(context: Context) : TreeNode.BaseNodeViewHolder<IconTre
 
         arrowView = view.findViewById(R.id.arrow_icon) as PrintView
 
-        view.findViewById(R.id.btn_addFolder).setOnClickListener {
+        view.findViewById<PrintView>(R.id.btn_addFolder).setOnClickListener {
             val newFolder = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_folder, "New Folder"))
             treeView!!.addNode(node, newFolder)
         }
 
-        view.findViewById(R.id.btn_delete).setOnClickListener { treeView!!.removeNode(node) }
+        view.findViewById<PrintView>(R.id.btn_delete).setOnClickListener { treeView!!.removeNode(node) }
 
         //if My computer
         if (node.level == 1) {
-            view.findViewById(R.id.btn_delete).visibility = View.GONE
+            view.findViewById<PrintView>(R.id.btn_delete).visibility = View.GONE
         }
 
         return view

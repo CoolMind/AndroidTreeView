@@ -56,7 +56,7 @@ class FolderStructureFragment : Fragment() {
 
         root.addChildren(computerRoot)
 
-        tView = AndroidTreeView(activity, root)
+        tView = AndroidTreeView(context!!, root)
         tView!!.setDefaultAnimation(true)
         tView!!.setDefaultContainerStyle(R.style.TreeNodeStyleCustom)
         tView!!.setDefaultViewHolder(IconTreeItemHolder::class.java)
@@ -109,7 +109,7 @@ class FolderStructureFragment : Fragment() {
     private val nodeLongClickListener = object : TreeNode.TreeNodeLongClickListener {
         override fun onLongClick(node: TreeNode, value: Any): Boolean {
             val item = value as IconTreeItemHolder.IconTreeItem
-            Toast.makeText(activity, "Long click: " + item.text, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Long click: " + item.text, Toast.LENGTH_SHORT).show()
             return true
         }
     }

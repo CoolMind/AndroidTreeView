@@ -28,7 +28,7 @@ class SelectableItemHolder(context: Context) : TreeNode.BaseNodeViewHolder<Strin
         nodeSelector!!.isChecked = node.isSelected
 
         if (node.isLastChild) {
-            view.findViewById(R.id.bot_line).visibility = View.INVISIBLE
+            view.findViewById<View>(R.id.bot_line).visibility = View.INVISIBLE
         }
 
         return view

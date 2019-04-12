@@ -6,7 +6,9 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
+import com.github.johnkil.print.PrintButton
 import com.unnamed.b.atv.model.TreeNode
 import com.unnamed.b.atv.sample.R
 import com.unnamed.b.atv.sample.holder.IconTreeItemHolder
@@ -29,47 +31,47 @@ class SelectableTreeFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_selectable_nodes, null, false)
         val containerView = rootView.findViewById(R.id.container) as ViewGroup
 
-        val selectionModeButton = rootView.findViewById(R.id.btn_toggleSelection)
+        val selectionModeButton = rootView.findViewById<PrintButton>(R.id.btn_toggleSelection)
         selectionModeButton.setOnClickListener {
             selectionModeEnabled = !selectionModeEnabled
             tView!!.isSelectionModeEnabled = selectionModeEnabled
         }
 
-        val selectAllBtn = rootView.findViewById(R.id.btn_selectAll)
+        val selectAllBtn = rootView.findViewById<Button>(R.id.btn_selectAll)
         selectAllBtn.setOnClickListener {
             if (!selectionModeEnabled) {
-                Toast.makeText(activity, "Enable selection mode first", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context!!, "Enable selection mode first", Toast.LENGTH_SHORT).show()
             }
             tView!!.selectAll(true)
         }
 
-        val deselectAll = rootView.findViewById(R.id.btn_deselectAll)
+        val deselectAll = rootView.findViewById<Button>(R.id.btn_deselectAll)
         deselectAll.setOnClickListener {
             if (!selectionModeEnabled) {
-                Toast.makeText(activity, "Enable selection mode first", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context!!, "Enable selection mode first", Toast.LENGTH_SHORT).show()
             }
             tView!!.deselectAll()
         }
 
-        val check = rootView.findViewById(R.id.btn_checkSelection)
+        val check = rootView.findViewById<Button>(R.id.btn_checkSelection)
         check.setOnClickListener {
             if (!selectionModeEnabled) {
-                Toast.makeText(activity, "Enable selection mode first", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context!!, "Enable selection mode first", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(activity, tView!!.selected.size.toString() + " selected", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context!!, tView!!.selected.size.toString() + " selected", Toast.LENGTH_SHORT).show()
             }
         }
 
         val root = TreeNode.root()
 
-        val s1 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_sd_storage, "Storage1")).setViewHolder(ProfileHolder(activity))
-        val s2 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_sd_storage, "Storage2")).setViewHolder(ProfileHolder(activity))
+        val s1 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_sd_storage, "Storage1")).setViewHolder(ProfileHolder(context!!))
+        val s2 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_sd_storage, "Storage2")).setViewHolder(ProfileHolder(context!!))
         s1.isSelectable = false
         s2.isSelectable = false
 
-        val folder1 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_folder, "Folder 1")).setViewHolder(SelectableHeaderHolder(activity))
-        val folder2 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_folder, "Folder 2")).setViewHolder(SelectableHeaderHolder(activity))
-        val folder3 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_folder, "Folder 3")).setViewHolder(SelectableHeaderHolder(activity))
+        val folder1 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_folder, "Folder 1")).setViewHolder(SelectableHeaderHolder(context!!))
+        val folder2 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_folder, "Folder 2")).setViewHolder(SelectableHeaderHolder(context!!))
+        val folder3 = TreeNode(IconTreeItemHolder.IconTreeItem(R.string.ic_folder, "Folder 3")).setViewHolder(SelectableHeaderHolder(context!!))
 
         fillFolder(folder1)
         fillFolder(folder2)
@@ -80,7 +82,7 @@ class SelectableTreeFragment : Fragment() {
 
         root.addChildren(s1, s2)
 
-        tView = AndroidTreeView(activity, root)
+        tView = AndroidTreeView(context!!, root)
         tView!!.setDefaultAnimation(true)
         containerView.addView(tView!!.view)
 
@@ -94,9 +96,9 @@ class SelectableTreeFragment : Fragment() {
     }
 
     private fun fillFolder(folder: TreeNode) {
-        val file1 = TreeNode("File1").setViewHolder(SelectableItemHolder(activity))
-        val file2 = TreeNode("File2").setViewHolder(SelectableItemHolder(activity))
-        val file3 = TreeNode("File3").setViewHolder(SelectableItemHolder(activity))
+        val file1 = TreeNode("File1").setViewHolder(SelectableItemHolder(context!!))
+        val file2 = TreeNode("File2").setViewHolder(SelectableItemHolder(context!!))
+        val file3 = TreeNode("File3").setViewHolder(SelectableItemHolder(context!!))
         folder.addChildren(file1, file2, file3)
     }
 
